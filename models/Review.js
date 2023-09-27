@@ -7,9 +7,9 @@ const mongoose = require('mongoose');
  * to: employee who recieved the review
  */
 const reviewSchema = new mongoose.Schema({
-    review: {
+    message: {
         type: String,
-        require: true
+        require: false
     },
     from: {
         type: mongoose.Schema.Types.ObjectId,
