@@ -9,7 +9,7 @@ const db = require("./config/mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const customMware = require('./config/middleware');
 
@@ -30,7 +30,7 @@ app.set("views", "./views");
 app.use(
     session({
         name: "employee-review",
-        secret: Process.env.SECRET,
+        secret: process.env.SECRET,
         resave: false,
         saveUninitialized: false,
         cookie: {
@@ -38,7 +38,7 @@ app.use(
         },
         store: MongoStore.create(
             {
-                mongoUrl: Process.env.MONGO_URL,
+                mongoUrl: process.env.MONGO_URL,
                 autoRemove: "disabled",
             },
             function (err) {
@@ -51,7 +51,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(passport.setAuthenticatedEmployee);
+app.use(passport.setAuthenticatedUser);
 
 app.use(flash());
 app.use(customMware.setFlash);

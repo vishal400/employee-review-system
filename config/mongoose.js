@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1/employee-review');
+mongoose.connect(process.env.MONGO_URL);
 
 const db = mongoose.connection;
 

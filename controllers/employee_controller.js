@@ -1,7 +1,7 @@
 const User = require("../models/User");
 
 // homepage for employees
-module.exports.home = async function (req, res) {
+module.exports.getEmployees = async function (req, res) {
     try {
         const users = await User.find({});
 
@@ -49,7 +49,7 @@ module.exports.delete = async function (req, res) {
             );
             return res.redirect("back");
         }
-        const user = await User.findByIdAndDelete(req.query.id);
+        const user = await User.findByIdAndDelete(req.params.id);
         if (!user) {
             req.flash("error", "Employee with this user id not found!");
             return res.redirect("back");
