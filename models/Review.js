@@ -13,11 +13,11 @@ const reviewSchema = new mongoose.Schema({
     },
     from: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Employee'
+        ref: 'User'
     },
     to: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Employee'
+        ref: 'User'
     }
 }, {
     timestamps: true
