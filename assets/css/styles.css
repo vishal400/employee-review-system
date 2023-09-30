@@ -14,6 +14,7 @@
   .review-container {
     max-width: 800px;
     margin: auto;
+    width: 96%;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -43,4 +44,57 @@
 
 .btn-assign {
     width: 100%;
+}
+
+.employee-list-item {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.btn-action {
+    white-space: nowrap;
+}
+
+.received-review {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-from {
+    font-weight: bold;
+}
+
+.review-date {
+    color: #777;
+}
+
+.assigned-review {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.review-header {
+    margin-bottom: 10px;
+}
+
+.review-to {
+    font-weight: bold;
+}
+
+.review-form {
+    margin-bottom: 0;
 }

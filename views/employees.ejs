@@ -1,0 +1,52 @@
+<div class="container mt-5 employee-container">
+    <h2 class="text-center mb-4">Employees</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Type</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(function(user) { %>
+                    <%if (user.id != locals.user._id) {%>
+                        <tr>
+                        <form action="/employees/update/<%= user._id %>" method="post">
+                            <td>
+                                <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>" required>
+                            </td>
+                            <td>
+                                <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="password" name="password" value="<%= user.password %>" required>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="type" name="type" value="<%= user.type %>" disabled>
+                            </td>
+                            <td class="text-center">
+                                <button type="submit" class="btn btn-primary btn-action">Update</button>
+                            </td>
+                            <td class="text-center">
+                                <a href="/employees/remove/<%= user._id %>" class="btn btn-danger btn-action">Delete</a>
+                            </td>
+                            <td class="text-center">
+                                <% if (user.type === 'employee') { %>
+                                    <a href="/employees/update-type/<%= user._id %>" class="btn btn-success btn-action">Make Admin</a>
+                                <% } %>
+                            </td>
+                        </form>
+                        </tr>
+                    <%}%>
+                    
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>

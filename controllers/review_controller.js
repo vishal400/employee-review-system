@@ -25,12 +25,14 @@ module.exports.getReviews = async function (req, res) {
         // const reviews = await Review.find({to: req.user._id}).populate({path: 'from'});
         const assignedReviews = user.assignedReviews;
         const reviews = user.reviews;
+        // console.log(reviews);
         const reviewWithMessages = reviews.filter((ele) => {
             if (ele.message && ele.message != "") {
                 return true;
             }
             return false;
         });
+        console.log("here", reviewWithMessages);
 
         return res.render("reviews", {
             assignedReviews: assignedReviews,

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Review = require("../models/Review");
 
 // homepage for employees
 module.exports.getEmployees = async function (req, res) {
@@ -9,15 +10,18 @@ module.exports.getEmployees = async function (req, res) {
             return res.render("employees", {
                 users: users,
                 error: false,
+                title: "Employees",
             });
         } else {
             return res.render("employees", {
                 error: "No employees found",
+                title: "Employees",
             });
         }
     } catch (error) {
         return res.render("employees", {
             error: "Unable to find employees. Please try again later",
+            title: "Employees",
         });
     }
 };
@@ -49,7 +53,36 @@ module.exports.delete = async function (req, res) {
             );
             return res.redirect("back");
         }
-        const user = await User.findByIdAndDelete(req.params.id);
+
+        const userId = req.params.id;
+
+        // get reviews related to the user
+        const reviewsToDelete = await Review.find({
+            $or: [{ from: userId }, { to: userId }],
+        });
+
+        // delete reviews
+        await Review.deleteMany({ $or: [{ from: userId }, { to: userId }] });
+
+        // Update other users' assignedReviews and reviews arrays
+        await User.updateMany(
+            {
+                $or: [
+                    { assignedReviews: { $in: reviewsToDelete } },
+                    { reviews: { $in: reviewsToDelete } },
+                ],
+            },
+            {
+                $pullAll: {
+                    assignedReviews: reviewsToDelete,
+                    reviews: reviewsToDelete,
+                },
+            }
+        );
+
+        // delete the user
+        const user = await User.findByIdAndDelete(userId);
+
         if (!user) {
             req.flash("error", "Employee with this user id not found!");
             return res.redirect("back");

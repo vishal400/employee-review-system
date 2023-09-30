@@ -1,66 +1,89 @@
 <div class="container mt-5 review-container">
     <h2 class="text-center mb-4">Reviews</h2>
 
-    <!-- Assigned Reviews Section -->
-    <div class="row review-section">
-        <div class="col-md-12">
-            <h4>Assigned Reviews</h4>
-            <ul class="list-group">
-                <!-- If no assigned reviews -->
-                <% if (assignedReviews.length === 0) { %>
-                <li class="list-group-item">No assigned reviews available</li>
-                <% } else { %> <% assignedReviews.forEach(function(review) { %>
-                <li class="list-group-item">
-                    <form
-                        action="/reviews/complete-review"
-                        method="post"
-                        class="review-form"
-                    >
-                        <div class="form-group">
-                            <input
-                                type="hidden"
-                                name="to"
-                                value="<%= review.to._id %>"
-                            />
-                            <label>To: <%= review.to.name %></label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                name="message"
-                                placeholder="Enter your review"
-                                required
-                            />
-                        </div>
-                        <button
-                            type="submit"
-                            class="btn btn-success"
-                        >
-                            Submit Review
-                        </button>
-                    </form>
-                </li>
-
-                <% }); %> <% } %>
-            </ul>
+    <div class="row">
+        <!-- Assigned Reviews Section -->
+        <div class="col-md-6">
+            <div class="row review-section">
+                <div class="col-md-12">
+                    <h4>Assigned Reviews</h4>
+                    <ul class="list-group">
+                        <!-- If no assigned reviews -->
+                        <% if (assignedReviews.length === 0) { %>
+                        <li class="list-group-item">
+                            No assigned reviews available
+                        </li>
+                        <% } else { %>
+                        <!-- If assigned reviews exist, loop through them -->
+                        <% assignedReviews.forEach(function(review) { %>
+                        <li class="list-group-item assigned-review">
+                            <div class="review-header">
+                                <span class="review-to"
+                                    >To: <%= review.to.name %></span
+                                >
+                            </div>
+                            <form
+                                action="/reviews/complete-review"
+                                method="post"
+                                class="review-form"
+                            >
+                                <div class="form-group">
+                                    <input
+                                        type="hidden"
+                                        name="to"
+                                        value="<%= review.to._id %>"
+                                    />
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        name="message"
+                                        placeholder="Enter your review"
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" class="btn btn-success">
+                                    Submit Review
+                                </button>
+                            </form>
+                        </li>
+                        <% }); %> <% } %>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Received Reviews Section -->
-    <div class="row review-section">
-        <div class="col-md-12">
-            <h4>Received Reviews</h4>
-            <ul class="list-group">
-                <!-- If no received reviews -->
-                <% if (reviews.length === 0) { %>
-                <li class="list-group-item">No received reviews available</li>
-                <% } else { %>
-                <!-- If received reviews exist, loop through them -->
-                <% reviews.forEach(function(review) { %>
-                <li class="list-group-item">
-                    From: <%= review.from.name %><br />Message: <%= review.message %>
-                </li>
-                <% }); %> <% } %>
-            </ul>
+        <!-- Received Reviews Section -->
+        <div class="col-md-6">
+            <div class="row review-section">
+                <div class="col-md-12">
+                    <h4>Received Reviews</h4>
+                    <ul class="list-group">
+                        <!-- If no received reviews -->
+                        <% if (reviews.length === 0) { %>
+                        <li class="list-group-item">
+                            No received reviews available
+                        </li>
+                        <% } else { %>
+                        <!-- If received reviews exist, loop through them -->
+                        <% reviews.forEach(function(review) { %>
+                        <li class="list-group-item received-review">
+                            <div class="review-header">
+                                <span class="review-from"
+                                    >From: <%= review.from.name %></span
+                                >
+                                <span class="review-date"
+                                    ><%= review.updatedAt.toDateString()
+                                    %></span
+                                >
+                            </div>
+                            <div class="review-message">
+                                <%= review.message %>
+                            </div>
+                        </li>
+                        <% }); %> <% } %>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
