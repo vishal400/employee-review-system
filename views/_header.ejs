@@ -2,7 +2,8 @@
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" href="#">
-            <img src="logo.png" alt="Logo" height="30" />
+            <!-- <img src="logo.png" alt="Logo" height="30" /> -->
+            <p class="m-0 p-0">Employee Review System</p>
         </a>
 
         <!-- Navbar Toggle Button (for mobile) -->
@@ -41,7 +42,12 @@
                 </li>
                 <%}%>
                 <li class="nav-item">
-                    <a class="nav-link" href="/users/sign-out">Sign Out</a>
+                    <a class="nav-link" href="/users/sign-out"
+                        >Log Out<i
+                            class="fa fa-sign-out mx-2"
+                            aria-hidden="true"
+                        ></i>
+                    </a>
                 </li>
                 <%} else {%>
                 <li class="nav-item">
