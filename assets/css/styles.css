@@ -58,7 +58,7 @@
     white-space: nowrap;
 }
 
-.received-review {
+.received-review .assigned-review{
     margin-bottom: 10px;
     border: 1px solid #ccc;
     padding: 10px;
@@ -77,14 +77,6 @@
 
 .review-date {
     color: #777;
-}
-
-.assigned-review {
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
 }
 
 .review-header {
